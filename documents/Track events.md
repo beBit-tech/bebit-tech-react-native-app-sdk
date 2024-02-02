@@ -2,12 +2,12 @@
 
 Each Event contains bundleId, bundleVersion, appName, deviceId, with the following default values:
 
-| Key           | iOS Default Value                     | Android Default Value      |
-| ------------- | ------------------------------------- | -------------------------- |
-| bundleId      | Bundle Identifier                     | App Identifier             |
-| bundleVersion | CFBundleShortVersionString            | PackageInfo versionName.   |
-| appName       | CFBundleDisplayName (or CFBundleName) | App Name                   |
-| deviceId      | IDFA (or "${IDFV}-IDFV")              | AAID (or "${SSAID}-SSAID") |
+| Key        | iOS Default Value                     | Android Default Value      |
+| ---------- | ------------------------------------- | -------------------------- |
+| appId      | Bundle Identifier                     | App Identifier             |
+| appVersion | CFBundleShortVersionString            | PackageInfo versionName.   |
+| appName    | CFBundleDisplayName (or CFBundleName) | App Name                   |
+| deviceId   | IDFA (or "${IDFV}-IDFV")              | AAID (or "${SSAID}-SSAID") |
 
 <!-- You can set these values by yourself: -->
 
