@@ -16,7 +16,7 @@ public class BebitTechReactNativeAppSdkPackage implements ReactPackage {
   @Override
   public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
     List<NativeModule> modules = new ArrayList<>();
-    modules.add(new BebitTechReactNativeAppSdkModule(reactContext));
+    modules.add(new OmniSegmentModule(reactContext));
     return modules;
   }
 
