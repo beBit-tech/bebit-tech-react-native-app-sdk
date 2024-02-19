@@ -67,7 +67,7 @@ export type OSGEvent = {
   transactionShipping?: string;
   transactionCouponCode?: string;
   label?: { [key: string]: any };
-  value?: number;
+  value?: string;
 };
 
 const defaultEvent: OSGEvent = {
