@@ -58,6 +58,11 @@ public class OmniSegmentModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
+  public void setAppName(String appName) {
+    OmniSegment.setAppName(appName);
+  }
+
+  @ReactMethod
   public void setDeviceId(String deviceId) {
     OmniSegment.setDeviceId(deviceId);
   }
