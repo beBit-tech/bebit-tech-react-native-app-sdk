@@ -116,7 +116,7 @@ export const OSGEventBuilder = {
     products: products,
   }),
   purchase: (
-    transactionId: String,
+    transactionId: string,
     revenue: number,
     products: OSGProduct[]
   ) => ({
@@ -127,7 +127,7 @@ export const OSGEventBuilder = {
     transactionRevenue: revenue,
     products: products,
   }),
-  refund: (transactionId: String, revenue: number, products: OSGProduct[]) => ({
+  refund: (transactionId: string, revenue: number, products: OSGProduct[]) => ({
     ...defaultEvent,
     action: Action.Refund,
     category: Category.Ecommerce,
