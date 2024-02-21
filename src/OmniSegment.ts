@@ -25,6 +25,8 @@ type OmniSegmentType = {
   fetchRecommendProducts: (
     request: OSGRecommendRequest
   ) => Promise<OSGRecommendProduct[]>;
+
+  handleWebViewMessage: (message: string) => void;
 };
 
 const OmniSegment: OmniSegmentType = {
@@ -90,6 +92,23 @@ const OmniSegment: OmniSegmentType = {
           specialPrice: product.special_price,
         }));
       });
+  },
+
+  handleWebViewMessage: (message: string): boolean => {
+    const object = JSON.parse(message);
+    if (object.key !== 'bebit-tech' || object.payload !== typeof 'string') {
+      return false;
+    }
+
+    switch (object.name) {
+      case 'sendOmniSegmentEvent':
+        native.trackEvent(object.payload);
+        break;
+      default:
+        return false;
+    }
+
+    return true;
   },
 };
 
