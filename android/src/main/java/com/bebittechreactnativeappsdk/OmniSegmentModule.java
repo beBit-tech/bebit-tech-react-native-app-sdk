@@ -88,6 +88,16 @@ public class OmniSegmentModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
+  public void setUid(String uid) {
+    OmniSegment.setUid(uid);
+  }
+
+  @ReactMethod
+  public void clearUid() {
+    OmniSegment.clearUid();
+  }
+
+  @ReactMethod
   public void trackEvent(String eventJsonString) {
     try {
       JSONObject eventJson = new JSONObject(eventJsonString);

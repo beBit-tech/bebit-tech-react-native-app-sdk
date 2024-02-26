@@ -21,6 +21,10 @@ type OmniSegmentType = {
 
   setCurrentPage: (pageName: string) => void;
   setFCMToken: (token: string) => void;
+
+  setUid: (uid: string) => void;
+  clearUid: () => void;
+
   trackEvent: (event: OSGEvent) => void;
   fetchRecommendProducts: (
     request: OSGRecommendRequest
@@ -61,6 +65,14 @@ const OmniSegment: OmniSegmentType = {
   setFCMToken: (token: string) => {
     fcmToken = token;
     native.setFCMToken(token);
+  },
+
+  setUid: (uid: string) => {
+    native.setUid(uid);
+  },
+
+  clearUid: () => {
+    native.clearUid();
   },
 
   trackEvent: (event: OSGEvent) => {

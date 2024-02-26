@@ -43,6 +43,16 @@ class BebitTechReactNativeAppSdk: NSObject {
     OmniSegment.setFCMToken(token)
   }
 
+  @objc(setUid:)
+  func setUid(uid: String) -> Void {
+    OmniSegment.setUid(uid)
+  }
+
+  @objc(clearUid:)
+  func clearUid() -> Void {
+    OmniSegment.clearUid()
+  }
+
   @objc(trackEvent:)
   func trackEvent(eventJsonString: String) -> Void {
     if let data = eventJsonString.data(using: .utf8) {

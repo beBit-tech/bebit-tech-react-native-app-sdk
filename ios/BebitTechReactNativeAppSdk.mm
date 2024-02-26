@@ -10,6 +10,8 @@ RCT_EXTERN_METHOD(login:(NSString *)uid)
 RCT_EXTERN_METHOD(logout)
 RCT_EXTERN_METHOD(setCurrentPage:(NSString *)pageKey)
 RCT_EXTERN_METHOD(setFCMToken:(NSString *)token)
+RCT_EXTERN_METHOD(setUid:(NSString *)uid)
+RCT_EXTERN_METHOD(clearUid)
 RCT_EXTERN_METHOD(trackEvent:(NSString *)eventJsonString)
 RCT_EXTERN_METHOD(fetchRecommendProducts:(NSString *)requestJsonString withResolver:(RCTPromiseResolveBlock)resolve withRejecter:(RCTPromiseRejectBlock)reject)
 

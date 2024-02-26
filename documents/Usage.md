@@ -5,13 +5,13 @@
 After the user logs in, you need to provide the user's uid to the sdk, so that the sdk can use it when sending records.
 
 ```typescript
-OmniSegment.login("uid")
+OmniSegment.login('uid');
 ```
 
 When the user logs out:
 
 ```typescript
-OmniSegment.logout()
+OmniSegment.logout();
 ```
 
 ## Set Current Page
@@ -19,7 +19,14 @@ OmniSegment.logout()
 When the user enters a new page, you need to provide the page key to the sdk, so that the sdk can use it to determine whether to display a popup.
 
 ```typescript
-OmniSegment.setCurrentPage("page_key")
+OmniSegment.setCurrentPage('page_key');
+```
+
+## Set Uid/ Clear Uid
+
+```typescript
+OmniSegment.setUid('uid');
+OmniSegment.clearUid();
 ```
 
 ## Set Firebase Cloud Messaging Token
@@ -29,5 +36,5 @@ OmniSegment.setCurrentPage("page_key")
 You need to provide the user's Firebase Cloud Messaging Token to the sdk, so that the sdk can use it when sending records and push notifications.
 
 ```typescript
-OmniSegment.setFCMToken("FCM Token")
+OmniSegment.setFCMToken('FCM Token');
 ```
