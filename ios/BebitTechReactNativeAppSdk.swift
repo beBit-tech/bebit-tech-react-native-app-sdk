@@ -48,7 +48,7 @@ class BebitTechReactNativeAppSdk: NSObject {
     OmniSegment.setUid(uid: uid)
   }
 
-  @objc(clearUid:)
+  @objc
   func clearUid() -> Void {
     OmniSegment.clearUid()
   }
