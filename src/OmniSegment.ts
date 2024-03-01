@@ -108,7 +108,7 @@ const OmniSegment: OmniSegmentType = {
 
   handleWebViewMessage: (message: string): boolean => {
     const object = JSON.parse(message);
-    if (object.key !== 'bebit-tech' || object.payload !== typeof 'string') {
+    if (object.key !== 'bebit-tech' || typeof object.payload !== 'string') {
       return false;
     }
 
