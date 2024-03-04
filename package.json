@@ -1,6 +1,6 @@
 {
   "name": "@bebit-tech/omnisegment",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "bebit-tech-react-native-app-sdk",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
