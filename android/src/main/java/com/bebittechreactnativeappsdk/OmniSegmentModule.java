@@ -104,6 +104,9 @@ public class OmniSegmentModule extends ReactContextBaseJavaModule {
       Map<String, Object> eventMap = toMap(eventJson);
       OSGEvent event = OSGEvent.custom("", null);
       event.appendAttributes(eventMap);
+
+      Log.d("OmniSegmentModule", "Send Event Payload: " + eventJson);
+
       OmniSegment.trackEvent(event);
     } catch (Exception e) {
       e.printStackTrace();
