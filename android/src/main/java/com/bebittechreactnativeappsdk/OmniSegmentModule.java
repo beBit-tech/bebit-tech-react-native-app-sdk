@@ -104,6 +104,20 @@ public class OmniSegmentModule extends ReactContextBaseJavaModule {
       Map<String, Object> eventMap = toMap(eventJson);
       OSGEvent event = OSGEvent.custom("", null);
       event.appendAttributes(eventMap);
+      if (eventMap.get("event_label") != null) {
+        Object eventLabelObj = eventMap.get("event_label");
+        if (eventLabelObj instanceof String) {
+          String eventLabelStr = (String) eventLabelObj;
+          try {
+              JSONObject eventLabelJson = new JSONObject(eventLabelStr);
+              Map<String, Object> eventLabelMap = toMap(eventLabelJson);
+              event.label = eventLabelMap;
+          } catch (JSONException e) {
+              Log.e("OmniSegmentModule", "Error parsing event_label JSON: " + e.getMessage());
+          }
+        }
+      }
+
 
       Log.d("OmniSegmentModule", "Send Event Payload: " + eventJson);
 
