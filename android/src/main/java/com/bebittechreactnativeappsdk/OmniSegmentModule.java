@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.HashMap;
 
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -95,6 +96,11 @@ public class OmniSegmentModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void clearUid() {
     OmniSegment.clearUid();
+  }
+
+  @ReactMethod
+  public void setPopupRedirectCallback(Callback jsCallback) {
+    OmniSegment.setPopupRedirectCallback(jsCallback);
   }
 
   @ReactMethod

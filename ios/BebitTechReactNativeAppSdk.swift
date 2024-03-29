@@ -53,6 +53,11 @@ class BebitTechReactNativeAppSdk: NSObject {
     OmniSegment.clearUid()
   }
 
+  @objc(performTaskWithCallback:)
+  public void setPopupRedirectCallback(callback: @escaping RCTResponseSenderBlock) {
+    OmniSegment.setPopupRedirectCallback(callback);
+  }
+
   @objc(trackEvent:)
   func trackEvent(eventJsonString: String) -> Void {
     if let data = eventJsonString.data(using: .utf8) {

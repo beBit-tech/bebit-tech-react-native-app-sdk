@@ -12,6 +12,7 @@ RCT_EXTERN_METHOD(setCurrentPage:(NSString *)pageKey)
 RCT_EXTERN_METHOD(setFCMToken:(NSString *)token)
 RCT_EXTERN_METHOD(setUid:(NSString *)uid)
 RCT_EXTERN_METHOD(clearUid)
+RCT_EXTERN_METHOD(setPopupRedirectCallback:(RCTResponseSenderBlock)callback)
 RCT_EXTERN_METHOD(trackEvent:(NSString *)eventJsonString)
 RCT_EXTERN_METHOD(fetchRecommendProducts:(NSString *)requestJsonString withResolver:(RCTPromiseResolveBlock)resolve withRejecter:(RCTPromiseRejectBlock)reject)
 
