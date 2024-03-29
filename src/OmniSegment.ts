@@ -8,6 +8,7 @@ import type {
 } from './OSGRecommend';
 
 var fcmToken = '';
+var webViewLocation = '';
 const native = NativeModules.BebitTechReactNativeAppSdk;
 
 type OmniSegmentType = {
@@ -24,6 +25,11 @@ type OmniSegmentType = {
 
   setUid: (uid: string) => void;
   clearUid: () => void;
+
+  setWebViewLocation: (location: string) => void;
+  resetWebViewLocation: () => void;
+
+  setPopupRedirectCallback: (callback: (url: string) => void) => void;
 
   trackEvent: (event: OSGEvent) => void;
   fetchRecommendProducts: (
@@ -75,6 +81,16 @@ const OmniSegment: OmniSegmentType = {
     native.clearUid();
   },
 
+  setWebViewLocation: (location: string) => {
+    webViewLocation = location;
+  },
+  resetWebViewLocation: () => {
+    webViewLocation = '';
+  },
+  setPopupRedirectCallback: (callback: (url: string) => void) => {
+    native.setPopupRedirectCallback(callback);
+  },
+
   trackEvent: (event: OSGEvent) => {
     if (
       event.action === Action.AppOpen ||
@@ -112,6 +128,14 @@ const OmniSegment: OmniSegmentType = {
       return false;
     }
 
+    if (webViewLocation.length > 0) {
+      const payload = JSON.parse(object.payload);
+      const newPayload = JSON.stringify({
+        ...payload,
+        document_location: webViewLocation,
+      });
+      object.payload = newPayload;
+    }
     switch (object.name) {
       case 'sendOmniSegmentEvent':
         native.trackEvent(object.payload);

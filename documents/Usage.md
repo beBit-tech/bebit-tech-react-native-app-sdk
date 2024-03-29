@@ -38,3 +38,24 @@ You need to provide the user's Firebase Cloud Messaging Token to the sdk, so tha
 ```typescript
 OmniSegment.setFCMToken('FCM Token');
 ```
+## Managing WebView Document Location
+
+To customize the document location reported in WebView events, use the setWebViewLocation method provided by OmniSegment SDK. This allows for overriding the default document location with a specified string.
+
+```typescript
+OmniSegment.setWebViewLocation("location")
+```
+
+After setting a custom document location, you may wish to revert to using the default document location in WebView events. Achieve this by invoking the resetWebViewLocation method.
+
+```typescript
+OmniSegment.resetWebViewLocation()
+```
+
+## Set popup redirect callback
+
+To use your own callback function to handle the redirect url behavior on popup button
+
+```typescript
+OmniSegment.setPopupRedirectCallback(_ callback: @escaping (String) -> Void)
+```
