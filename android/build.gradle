@@ -87,6 +87,6 @@ dependencies {
   implementation 'com.google.android.material:material:1.11.0'
   implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
   implementation 'androidx.lifecycle:lifecycle-runtime:2.7.0'
-  implementation 'com.github.beBit-tech:bebit-tech-android-app-sdk:0.0.8@aar'
+  implementation 'com.github.beBit-tech:bebit-tech-android-app-sdk:0.0.10@aar'
 }
 
