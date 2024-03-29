@@ -99,9 +99,17 @@ public class OmniSegmentModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void setPopupRedirectCallback(Callback jsCallback) {
-    OmniSegment.setPopupRedirectCallback(jsCallback);
+  public void setPopupRedirectCallback(final Callback rnCallback) {
+      Consumer<String> javaCallback = new Consumer<String>() {
+          @Override
+          public void accept(String s) {
+              rnCallback.invoke(s);
+          }
+      };
+
+      OmniSegment.setPopupRedirectCallback(javaCallback);
   }
+
 
   @ReactMethod
   public void trackEvent(String eventJsonString) {
