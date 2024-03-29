@@ -53,9 +53,11 @@ class BebitTechReactNativeAppSdk: NSObject {
     OmniSegment.clearUid()
   }
 
-  @objc(performTaskWithCallback:)
-  public void setPopupRedirectCallback(callback: @escaping RCTResponseSenderBlock) {
-    OmniSegment.setPopupRedirectCallback(callback);
+  @objc func setPopupRedirectCallback(_ callback: @escaping RCTResponseSenderBlock) {
+      let swiftCallback: (String) -> Void = { url in
+          callback([url])
+      }
+      OmniSegment.setPopupRedirectCallback(swiftCallback)
   }
 
   @objc(trackEvent:)
