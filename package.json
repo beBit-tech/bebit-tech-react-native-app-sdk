@@ -1,6 +1,6 @@
 {
-  "name": "bebit-tech-react-native-app-sdk",
-  "version": "0.1.0",
+  "name": "@bebit-tech/omnisegment",
+  "version": "0.0.10",
   "description": "bebit-tech-react-native-app-sdk",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -37,7 +37,9 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "bebit-tech",
+    "omnisegment"
   ],
   "repository": {
     "type": "git",
