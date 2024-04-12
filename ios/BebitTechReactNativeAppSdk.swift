@@ -67,7 +67,16 @@ class BebitTechReactNativeAppSdk: NSObject {
         if let eventJson = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
           print("Send event payload: \(eventJson)")
 
-          OmniSegment.trackEvent(OSGEvent(from: eventJson))
+          let event_action: String
+          if let eventAction = eventJson["event_action"] as? String {
+             event_action = eventAction
+          } else {
+            print("Missing event_action key")
+            return
+          }
+          let event = OSGEvent.custom(action: event_action)
+          event.appendAttributes(eventJson)
+          OmniSegment.trackEvent(event)
         } else {
           print("Invalid event json")
         }
