@@ -72,8 +72,8 @@ class BebitTechReactNativeAppSdk: NSObject {
               event_action = eventAction
               print("Send event_action? : \(event_action)")
           } else {
-            print("Missing event_action key")
-            event_action = ""
+              event_action = ""
+              print("Impression event sent without event_action")
           }
 
           let event = OSGEvent.custom(action: event_action)
