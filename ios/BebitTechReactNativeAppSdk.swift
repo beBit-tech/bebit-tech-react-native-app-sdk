@@ -69,11 +69,13 @@ class BebitTechReactNativeAppSdk: NSObject {
 
           let event_action: String
           if let eventAction = eventJson["event_action"] as? String {
-             event_action = eventAction
+              event_action = eventAction
+              print("Send event_action? : \(event_action)")
           } else {
-            print("Missing event_action key")
-            return
+              event_action = ""
+              print("Impression event sent without event_action")
           }
+
           let event = OSGEvent.custom(action: event_action)
           event.appendAttributes(eventJson)
           OmniSegment.trackEvent(event)
