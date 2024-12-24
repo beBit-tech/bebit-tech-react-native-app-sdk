@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.source       = { :path => '.' }
 
   s.source_files = "ios/**/*.{h,m,mm,swift}"
-
+  s.frameworks = 'WebKit'
   s.dependency 'OmniSegmentKit', '~> 1.0.3-beta.0'
 
   # Use install_modules_dependencies helper to install the dependencies if React Native version >=0.71.0.
