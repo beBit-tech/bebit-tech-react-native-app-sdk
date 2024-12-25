@@ -87,26 +87,4 @@ class BebitTechReactNativeAppSdk: NSObject {
       }
     }
   }
-
-  @objc(fetchRecommendProducts:withResolver:withRejecter:)
-  func fetchRecommendProducts(requestJsonString: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
-    if let jsonData = requestJsonString.data(using: .utf8) {
-      do {
-        let request = try JSONDecoder().decode(OSGRecommendRequest.self, from: jsonData)
-        OmniSegment.fetchRecommendProduct(request) {[resolve, reject] results in
-          if let data = try? JSONEncoder().encode(results),
-             let jsonString = String(data: data, encoding: .utf8) {
-            resolve(jsonString)
-          } else {
-            reject("Invalid response json", "Invalid response json", nil)
-          }
-        }
-      } catch {
-        print(error.localizedDescription)
-        reject(error.localizedDescription, error.localizedDescription, error)
-      }
-    } else {
-      reject("Invalid request json", "Invalid request json", nil)
-    }
-  }
 }
