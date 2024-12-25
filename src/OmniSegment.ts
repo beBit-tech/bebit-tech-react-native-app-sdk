@@ -1,11 +1,6 @@
 import { NativeModules } from 'react-native';
 import { Action, type OSGEvent } from './OSGEvent';
 import type { OSGProduct } from './OSGProduct';
-import type {
-  AdditionalImage,
-  OSGRecommendProduct,
-  OSGRecommendRequest,
-} from './OSGRecommend';
 
 var fcmToken = '';
 var webViewLocation = '';
@@ -32,9 +27,6 @@ type OmniSegmentType = {
   setPopupRedirectCallback: (callback: (url: string) => void) => void;
 
   trackEvent: (event: OSGEvent) => void;
-  fetchRecommendProducts: (
-    request: OSGRecommendRequest
-  ) => Promise<OSGRecommendProduct[]>;
 
   handleWebViewMessage: (message: string) => void;
 };
@@ -99,27 +91,6 @@ const OmniSegment: OmniSegmentType = {
       event.extraAttributes.fcm_token = fcmToken;
     }
     native.trackEvent(OSGEventToJSONString(event));
-  },
-
-  fetchRecommendProducts: (
-    request: OSGRecommendRequest
-  ): Promise<OSGRecommendProduct[]> => {
-    return native
-      .fetchRecommendProducts(JSON.stringify(request))
-      .then((jsonString: string) => {
-        const jsonObject = JSON.parse(jsonString) as any[];
-        return jsonObject.map((product) => ({
-          id: product.product_id,
-          name: product.product_name,
-          price: product.product_price,
-          url: product.product_url,
-          imageUrl: product.photo_url,
-          additionalImages: product.additional_photo_url.map(
-            (item: Object) => item as AdditionalImage
-          ),
-          specialPrice: product.special_price,
-        }));
-      });
   },
 
   handleWebViewMessage: (message: string): boolean => {
