@@ -1,28 +1,46 @@
 package com.bebittechreactnativeappsdk;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-import com.facebook.react.ReactPackage;
+import com.facebook.react.TurboReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.uimanager.ViewManager;
+import com.facebook.react.module.model.ReactModuleInfo;
+import com.facebook.react.module.model.ReactModuleInfoProvider;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-public class BebitTechReactNativeAppSdkPackage implements ReactPackage {
-  @NonNull
-  @Override
-  public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
-    List<NativeModule> modules = new ArrayList<>();
-    modules.add(new OmniSegmentModule(reactContext));
-    return modules;
-  }
+public class BebitTechReactNativeAppSdkPackage extends TurboReactPackage {
+    @Nullable
+    @Override
+    public NativeModule getModule(String name, ReactApplicationContext reactContext) {
+        if (name.equals(OmniSegmentModule.NAME)) {
+            return new OmniSegmentModule(reactContext);
+        }
+        return null;
+    }
 
-  @NonNull
-  @Override
-  public List<ViewManager> createViewManagers(@NonNull ReactApplicationContext reactContext) {
-    return Collections.emptyList();
-  }
+    @Override
+    public ReactModuleInfoProvider getReactModuleInfoProvider() {
+        return () -> {
+            final Map<String, ReactModuleInfo> moduleInfo = new HashMap<>();
+
+            boolean isTurboModule = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
+            moduleInfo.put(
+                OmniSegmentModule.NAME,
+                new ReactModuleInfo(
+                    OmniSegmentModule.NAME, // 模組名稱，用於 JS 端
+                    OmniSegmentModule.NAME, // 模組類名
+                    false, // canOverrideExistingModule：是否可被覆蓋
+                    false, // needsEagerInit：是否需要在 app 啟動時就初始化
+                    true, // hasConstants：是否包含常數
+                    false, // isCxxModule：是否是 C++ 模組，純 Java 模組設為 false
+                    isTurboModule // 是否是 Turbo Module，新架構設為 true
+                )
+            );
+            return moduleInfo;
+        };
+    }
 }

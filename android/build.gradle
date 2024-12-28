@@ -42,6 +42,16 @@ android {
 
     sourceSets {
       main {
+        if (isNewArchitectureEnabled()) {
+          java {
+            srcDirs += [
+              "src/newarch",
+              "${project.buildDir}/generated/source/codegen/java"
+            ]
+          }
+        } else {
+          java.srcDirs += ["src/oldarch"]
+        }
         manifest.srcFile "src/main/AndroidManifestNew.xml"
       }
     }
@@ -52,7 +62,8 @@ android {
   defaultConfig {
     minSdkVersion getExtOrIntegerDefault("minSdkVersion")
     targetSdkVersion getExtOrIntegerDefault("targetSdkVersion")
-
+    
+    buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
   }
 
   buildTypes {
@@ -88,5 +99,13 @@ dependencies {
   implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
   implementation 'androidx.lifecycle:lifecycle-runtime:2.7.0'
   implementation 'com.github.beBit-tech:bebit-tech-android-app-sdk:1.0.2-beta.1@aar'
+
 }
 
+if (isNewArchitectureEnabled()) {
+  react {
+    jsRootDir = file("../src/")
+    libraryName = "BebitTechReactNativeAppSdk"
+    codegenJavaPackageName = "com.bebittechreactnativeappsdk"
+  }
+}

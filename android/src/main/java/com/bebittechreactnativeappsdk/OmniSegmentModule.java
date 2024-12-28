@@ -26,7 +26,7 @@ import com.bebittech.omnisegment.OmniSegment;
 import com.bebittech.omnisegment.OSGEvent;
 
 @ReactModule(name = OmniSegmentModule.NAME)
-public class OmniSegmentModule extends ReactContextBaseJavaModule {
+public class OmniSegmentModule extends BebitTechReactNativeAppSdkSpec {
   public static final String NAME = "BebitTechReactNativeAppSdk";
 
   public OmniSegmentModule(ReactApplicationContext reactContext) {
