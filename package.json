@@ -166,7 +166,7 @@
     ]
   },
   "codegenConfig": {
-    "name": "BebitTechReactNativeAppSdk",
+    "name": "BebitTechReactNativeAppSdkSpec",
     "type": "modules",
     "jsSrcsDir": "src",
     "android": {

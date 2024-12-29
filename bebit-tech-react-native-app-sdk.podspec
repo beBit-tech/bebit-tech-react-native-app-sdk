@@ -15,7 +15,6 @@ Pod::Spec.new do |s|
   s.source       = { :path => '.' }
 
   s.source_files = "ios/**/*.{h,m,mm,swift}"
-  s.private_header_files = 'ios/BebitTechReactNativeAppSdk-Swift.pre.h'
 
   s.dependency 'OmniSegmentKit', '~> 1.0.3-beta.4'
 
@@ -35,8 +34,6 @@ Pod::Spec.new do |s|
           "OTHER_CPLUSPLUSFLAGS" => "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1",
           "CLANG_CXX_LANGUAGE_STANDARD" => "c++17",
           'SWIFT_INSTALL_OBJC_HEADER' => 'YES',
-          'SWIFT_OBJC_INTERFACE_HEADER_NAME' => 'BebitTechReactNativeAppSdk-Swift.h',
-          'DEFINES_MODULE' => 'YES'
       }
       s.dependency "React-Codegen"
       s.dependency "RCT-Folly"
