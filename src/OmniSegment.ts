@@ -1,10 +1,16 @@
-import { NativeModules } from 'react-native';
+import type { Spec } from './NativeBebitTechReactNativeAppSdk';
+import { TurboModuleRegistry } from 'react-native';
+
 import { Action, type OSGEvent } from './OSGEvent';
 import type { OSGProduct } from './OSGProduct';
 
 var fcmToken = '';
 var webViewLocation = '';
-const native = NativeModules.BebitTechReactNativeAppSdk;
+
+// 新架構: 使用 JSI 直接共享記憶體，JS 可以直接呼叫 C++ 物件的方法
+const native = TurboModuleRegistry.getEnforcing<Spec>(
+  'BebitTechReactNativeAppSdk'
+);
 
 type OmniSegmentType = {
   setAppId: (appId: string) => void;
@@ -122,7 +128,7 @@ const OmniSegment: OmniSegmentType = {
 export default OmniSegment;
 
 // Utils
-function OSGEventToJSONString(event: OSGEvent): String {
+function OSGEventToJSONString(event: OSGEvent): string {
   const { extraAttributes } = event;
 
   const eventDict: { [key: string]: any } = {
