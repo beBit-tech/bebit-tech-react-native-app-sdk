@@ -62,7 +62,7 @@ android {
   defaultConfig {
     minSdkVersion getExtOrIntegerDefault("minSdkVersion")
     targetSdkVersion getExtOrIntegerDefault("targetSdkVersion")
-    
+
     buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
   }
 
@@ -98,7 +98,7 @@ dependencies {
   implementation 'com.google.android.material:material:1.11.0'
   implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
   implementation 'androidx.lifecycle:lifecycle-runtime:2.7.0'
-  implementation 'com.github.beBit-tech:bebit-tech-android-app-sdk:1.0.2@aar'
+  implementation 'com.github.beBit-tech:bebit-tech-android-app-sdk:1.0.4@aar'
 
   implementation(platform("io.sentry:sentry-bom:7.3.0"))
   implementation("io.sentry:sentry-android")
