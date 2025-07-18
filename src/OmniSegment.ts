@@ -1,11 +1,48 @@
 import type { Spec } from './NativeBebitTechReactNativeAppSdk';
 import { TurboModuleRegistry } from 'react-native';
 
-import { Action, type OSGEvent } from './OSGEvent';
+import { Action, type OSGEvent, OSGEventBuilder } from './OSGEvent';
 import type { OSGProduct } from './OSGProduct';
 
 var fcmToken = '';
 var webViewLocation = '';
+
+class TrackingApi {
+  static callTrackingURL(
+    urlString: string,
+    completion: (result: string) => void
+  ) {
+    const modifiedURL = this.modifyTrackingURL(urlString);
+
+    fetch(modifiedURL, { method: 'GET' })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then((responseString) => {
+        completion(responseString);
+      })
+      .catch((error) => {
+        completion(`Error: ${error.message}`);
+      });
+  }
+
+  private static modifyTrackingURL(urlString: string): string {
+    try {
+      const url = new URL(urlString);
+
+      // Find and modify the 'goto' parameter
+      url.searchParams.set('goto', '0');
+
+      const modifiedURL = url.toString();
+      return modifiedURL;
+    } catch (error) {
+      return urlString;
+    }
+  }
+}
 
 // 新架構: 使用 JSI 直接共享記憶體，JS 可以直接呼叫 C++ 物件的方法
 const native = TurboModuleRegistry.getEnforcing<Spec>(
@@ -35,6 +72,11 @@ type OmniSegmentType = {
   trackEvent: (event: OSGEvent) => void;
 
   handleWebViewMessage: (message: string) => void;
+
+  handleNotification: (
+    pushNotificationData: { [key: string]: any },
+    isUserClicked?: boolean
+  ) => void;
 };
 
 const OmniSegment: OmniSegmentType = {
@@ -122,6 +164,29 @@ const OmniSegment: OmniSegmentType = {
     }
 
     return true;
+  },
+
+  handleNotification: (
+    pushNotificationData: { [key: string]: any },
+    isUserClicked: boolean = false
+  ) => {
+    const data = pushNotificationData.data || {};
+    if (isUserClicked) {
+      if (
+        data.omnisegment_tracking_url &&
+        typeof data.omnisegment_tracking_url === 'string'
+      ) {
+        TrackingApi.callTrackingURL(
+          data.omnisegment_tracking_url,
+          (result: string) => {
+            const event = OSGEventBuilder.productImpression([]);
+            event.location = result;
+            OmniSegment.trackEvent(event);
+          }
+        );
+      }
+      return;
+    }
   },
 };
 
