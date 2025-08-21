@@ -147,6 +147,18 @@ public class OmniSegmentModule extends BebitTechReactNativeAppSdkSpec {
     }
   }
 
+  public static void changeEventApiEndpoint(String endpoint) {
+    OmniSegment.changeEventApiEndpoint(endpoint);
+  }
+
+  public static void changeBackgroundServiceURL(String url) {
+    OmniSegment.changeBackgroundServiceURL(url);
+  }
+
+  public static void changeApiHost(String host) {
+    OmniSegment.changeApiHost(host);
+  }
+
   // Utils
   Map<String, Object> toMap(JSONObject json) throws JSONException {
     Map<String, Object> map = new HashMap<String, Object>();
